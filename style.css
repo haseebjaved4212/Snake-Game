@@ -26,8 +26,8 @@ main,section{
   width: 100%;
 
 }
-section.infos{
+section .infos{
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
