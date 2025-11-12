@@ -150,10 +150,10 @@
     if (score > highScore) { highScore = score; localStorage.setItem('snake_high', String(highScore)); updateHigh(); }
     // simple visual
     draw();
-    // show overlay text
+    // show styled modal instead of confirm
     setTimeout(() => {
-      if (confirm('Game Over. Restart?')) { startGame(); }
-    }, 100);
+      showGameOverModal(score, highScore);
+    }, 120);
   }
 
   function updateScore() { if (scoreEl()) scoreEl().textContent = String(score) }
@@ -210,6 +210,43 @@
   function init() { createCanvas(); resize(); updateHigh(); updateScore(); updateTime(); }
 
   init();
+
+  // Modal wiring
+  function showGameOverModal(scoreVal, highVal) {
+    const backdrop = document.getElementById('modal-backdrop');
+    const ms = document.getElementById('modal-score');
+    const mh = document.getElementById('modal-high');
+    const restart = document.getElementById('modal-restart');
+    const close = document.getElementById('modal-close');
+    if (!backdrop || !ms || !mh) return;
+    ms.textContent = String(scoreVal);
+    mh.textContent = String(highVal);
+    backdrop.classList.add('show');
+    backdrop.setAttribute('aria-hidden', 'false');
+
+    function cleanup() {
+      backdrop.classList.remove('show');
+      backdrop.setAttribute('aria-hidden', 'true');
+      restart.removeEventListener('click', onRestart);
+      close.removeEventListener('click', onClose);
+      backdrop.removeEventListener('click', onBackdrop);
+      document.removeEventListener('keydown', onKey);
+    }
+
+    function onRestart() { cleanup(); startGame(); }
+    function onClose() { cleanup(); }
+
+    function onBackdrop(e) { if (e.target === backdrop) { cleanup(); } }
+    function onKey(e) { if (e.key === 'Escape') { cleanup(); } }
+
+    restart.addEventListener('click', onRestart);
+    close.addEventListener('click', onClose);
+    backdrop.addEventListener('click', onBackdrop);
+    document.addEventListener('keydown', onKey);
+
+    // focus restart for accessibility
+    restart.focus();
+  }
 
   // expose UI
   window.ui = { setScore(v) { score = v; updateScore() }, setHigh(v) { highScore = v; updateHigh() }, setTime(v) { timeEl().textContent = v } };
