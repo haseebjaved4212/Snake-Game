@@ -1,90 +1,155 @@
+:root {
+  --bg: #0b0b0c;
+  --panel: #0f0f10;
+  --muted: #9aa0a6;
+  --line: rgba(120, 120, 120, 0.12);
+  --accent: #e6e6e6;
+  --cell-size-default: 28px;
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
+html,
 body {
   height: 100%;
-  width: 100%;
+  background: var(--bg);
+  color: var(--accent);
+  font-family: system-ui, Segoe UI, Roboto, Arial;
 }
-
-:root {
-  --bg-primary-color: #0c0c0c;
-
-  /* text colors  */
-  --text-primary-color: #f0f0f0;
-
-  /* Spacing Variables */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 40px;
-  --spacing-3xl: 48px;
-
-  /*  Border Colors */
-  --border-primary-color: #353333;
-
-  /* Border Radius  */
-  --border-radius-xs: 4px;
-  --border-radius-sm: 8px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 16px;
-  --border-radius-xl: 20px;
-  --border-radius-2xl: 24px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-html {
-  background-color: var(--bg-primary-color);
-  color: var(--text-primary-color);
-}
-main,
-section {
-  height: 100%;
-  width: 100%;
-}
-section {
-  padding: var(--spacing-2xl);
+main {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-  height: 100%;
-  /* background-color: aliceblue; */
+  align-items: flex-start;
+  justify-content: center;
 }
-section .infos {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  
+.section-wrap {
+  width: 100vw;
+  max-width: 100%;
+  padding: 20px;
 }
 
+/* header pills */
+.infos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+.infos .info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+.infos .info:first-child {
+  justify-content: flex-start;
+}
+.infos .info:last-child {
+  justify-content: flex-end;
+}
 .info {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--border-primary-color);
-  border-radius: var(--border-radius-sm);
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+}
+.info h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info span {
+  display: inline-block;
+  padding: 4px 8px;
+  background: transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 700;
 }
 
+/* board */
 .board {
-  border: 1px solid var(--border-primary-color);
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 30px);
-  grid-auto-rows: repeat(auto-fill, 30px);
+  width: 100%;
+  max-width: 1200px;
+  height: 72vh;
+  border-radius: 10px;
+  padding: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.01)
+  );
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6) inset;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
 }
-.block{
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--border-primary-color);
+.grid {
+  position: relative;
+  inset: 0;
+  border-radius: 8px;
+  background-color: #060606;
+  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  --cell-size: var(--cell-size-default);
+  background-size: var(--cell-size) var(--cell-size),
+    var(--cell-size) var(--cell-size);
+  width: 100%;
+  height: 100%;
+}
+
+/* canvas overlay */
+.grid canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 14px;
+}
+.controls button {
+  background: var(--panel);
+  color: var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* responsive tweaks */
+@media (max-width: 900px) {
+  .board {
+    max-width: 900px;
+    height: 62vh;
+  }
+}
+@media (max-width: 600px) {
+  .infos {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .infos .info {
+    justify-content: center;
+  }
+  .board {
+    height: 56vh;
+    padding: 12px;
+  }
 }

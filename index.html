@@ -1,42 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Snake Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <main>
-    <section>
-      <div class="infos">
+    <div class="section-wrap">
+      <header class="infos">
         <div class="info">
-          <h3>High Score:
-
-            <span id="high-score">0</span>
-          </h3>
+          <h3>High Score: <span id="high-score">0</span></h3>
+        </div>
+        <div class="info center">
+          <h3>Score: <span id="score">0</span></h3>
         </div>
         <div class="info">
-          <h3>Score:
-
-            <span id="score">0</span>
-          </h3>
+          <h3>Time: <span id="time">00:00</span></h3>
         </div>
-        <div class="info">
-          <h3>Time:
+      </header>
 
-            <span id="time">00-00</span>
-          </h3>
+      <section class="board">
+        <div class="grid">
+          <!-- canvas will be inserted by JS -->
         </div>
+      </section>
 
+      <div class="controls">
+        <button id="btn-start">Start</button>
+        <button id="btn-pause">Pause</button>
+        <button id="btn-reset">Reset</button>
       </div>
-      <div class="board">
-   
-      </div>
-    </section>
+    </div>
   </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Game </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
   <script src="script.js"></script>
 </body>
 
