@@ -15,6 +15,19 @@ A responsive Snake game built with HTML, CSS and vanilla JavaScript. The project
 - Start / Pause / Reset controls and a polished game-over modal with Restart/Close actions.
 - CSS grid background for a classic Snake board appearance. The canvas draws the snake and food.
 
+## Responsive design
+
+- Mobile layout 
+  ![mobile-layout](images/Mobile.png)
+
+- Desktop layout 
+  ![desktop-layout](images/laptop.png)
+
+
+- Tablet layout 
+  ![tablet-layout](images/Ipad.png)
+
+
 ## Project structure
 
 ```
@@ -26,7 +39,7 @@ Snake Game/
 └─ images/             # (optional) images you can add (see below)
 ```
 
-Note: `images/` may be empty by default. You can add sprite images or background images there and wire them in `script.js` or `style.css` as described below.
+
 
 ## How to run
 
@@ -35,14 +48,6 @@ Open `index.html` in your browser. On Windows PowerShell you can run:
 ```powershell
 ii .\index.html
 ```
-
-For better parity with some browsers' security restrictions, run a local server from the project folder:
-
-```powershell
-python -m http.server 8000; ii http://localhost:8000
-```
-
-Then open `http://localhost:8000`.
 
 ## Controls
 
@@ -65,54 +70,10 @@ The result is a board that displays a consistent number of square cells across d
 - High score is stored in `localStorage` under the key `snake_high` and displayed in the left header pill.
 - The timer shows elapsed time (MM:SS) since the current game start.
 
-## Adding images to `images/`
 
-You can add images for decoration (backgrounds), for the food, or for UI icons. The project does not currently use any images by default, but here's how to integrate them:
 
-1. Create an `images/` folder in the project root (if it doesn't already exist).
-2. Place your assets inside, for example:
 
-```
-images/
-  food.png
-  snake-head.png
-  snake-body.png
-  bg-pattern.png
-```
 
-3. Using CSS (for backgrounds or UI icons):
-
-```css
-.board {
-  background-image: url("images/bg-pattern.png"), linear-gradient(...);
-}
-.info .icon {
-  width: 20px;
-  height: 20px;
-  background-image: url("images/icon.png");
-}
-```
-
-4. Using JavaScript (to draw sprites on the canvas):
-
-- Load an `Image` and draw it inside the canvas cell using `drawImage(image, x*cell, y*cell, cell, cell)`.
-
-Example snippet to draw food using an image (add to `script.js`):
-
-```js
-const foodImg = new Image();
-foodImg.src = "images/food.png";
-foodImg.onload = () => {
-  /* safe to draw when available */
-};
-
-function drawFood() {
-  if (!food) return;
-  ctx.drawImage(foodImg, food.x * cell, food.y * cell, cell, cell);
-}
-```
-
-Note: Ensure the image path is correct relative to `index.html`.
 
 ## Customization and tuning
 
@@ -138,9 +99,4 @@ If you find issues or want to contribute enhancements, feel free to:
 
 ---
 
-If you want, I can also:
-
-- Wire an example `images/food.png` and update `script.js` to use it for the food sprite.
-- Add a small `CONTRIBUTING.md` with branch and commit rules.
-
-Tell me which you'd like and I'll implement it next.
+- Made with ❤️ for learning and fun!
